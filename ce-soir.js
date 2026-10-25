@@ -50,7 +50,7 @@
       : max >= 5 ? "Orage géomagnétique annoncé : les aurores descendent sur le nord de l'Europe, la France reste en limite."
       : "Pas d'aurore attendue en France cette nuit : le Kp reste trop bas.";
     document.getElementById("direct").innerHTML =
-      `<div class="chiffres"><p><strong>${actuel ? fmt(actuel.kp) : "—"}</strong>Kp maintenant${actuel ? `, ${niveau(actuel.kp)}` : ""}</p>` +
+      `<div class="chiffres"><p><strong>${actuel ? fmt(actuel.kp) : "?"}</strong>Kp maintenant${actuel ? `, ${niveau(actuel.kp)}` : ""}</p>` +
       `<p><strong>${fmt(max)}</strong>Kp maximum cette nuit${pic ? `, vers ${heure(pic.debut)}` : ""}</p></div>` +
       `<p class="constat${max >= 7 ? " ok" : ""}">${verdict}</p>` +
       `<div class="barres" aria-hidden="true">${barres}</div>` +

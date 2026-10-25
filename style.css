@@ -1,18 +1,71 @@
-:root{--bg:#0B0B0D;--ink:#F2EBDD;--muted:#B5AE9F;--accent:#7CF0B5;--card:#16161A}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-main{max-width:720px;margin:0 auto;padding:48px 20px}img.icon{width:96px;height:96px;border-radius:22px;box-shadow:0 8px 24px rgba(0,0,0,.4)}
-h1{font-size:34px;margin:20px 0 6px}h2{font-size:21px;margin-top:32px}p,li{color:var(--muted)}a{color:var(--accent)}
-.card{background:var(--card);border-radius:20px;padding:20px 22px;margin:22px 0}
-footer{margin-top:40px;font-size:14px;color:var(--muted)}
-.note{font-size:13px}h2.haut{margin-top:4px}
-.chiffres{display:grid;grid-template-columns:1fr 1fr;gap:12px}.chiffres p{margin:0;font-size:14px}
-.chiffres strong{display:block;font-size:44px;line-height:1.1;color:var(--ink);font-variant-numeric:tabular-nums}
-.constat{border-radius:12px;padding:10px 12px;color:var(--ink);background:rgba(255,255,255,.06)}.constat.ok{background:rgba(124,240,181,.16)}
-.barres{display:flex;gap:4px;height:110px;align-items:stretch;margin:14px 0 4px}
+/* Lueur : nuit noire, une seule couleur, celle de l'aurore. Échelle d'espacement de 8 px. */
+@font-face{font-family:"Archivo";src:url(fonts/archivo.woff2) format("woff2");font-weight:100 900;font-stretch:62% 125%;font-display:swap}
+:root{
+  --nuit:#0A0B0E;--ink:#ECEADF;--muted:#A9A596;--trait:#2A2B2F;--aurore:#7CF0B5;
+  --s1:8px;--s2:16px;--s3:24px;--s4:32px;--s6:48px;--s8:64px;--s12:96px;
+  --large:1120px
+}
+*{box-sizing:border-box}
+html{background:var(--nuit)}
+body{margin:0;color:var(--ink);font:400 18px/1.6 "Archivo",system-ui,sans-serif;font-stretch:100%;-webkit-font-smoothing:antialiased}
+main{max-width:var(--large);margin:0 auto;padding:var(--s6) var(--s3) var(--s8)}
+a{color:var(--aurore);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover,a:focus-visible{color:var(--ink);text-decoration-thickness:2px}
+:focus-visible{outline:2px solid var(--aurore);outline-offset:3px}
+p,li{color:var(--muted);max-width:62ch}
+strong{color:var(--ink);font-weight:600}
+
+/* En-tête : l'icône et le nom en petit, comme une signature */
+.marque{display:flex;align-items:center;gap:var(--s2);margin-bottom:var(--s12);text-decoration:none;color:var(--ink);font-weight:600;letter-spacing:.02em}
+.marque img,img.icon{width:40px;height:40px;border-radius:10px}
+img.icon{display:block;margin-bottom:var(--s6)}
+
+/* Titres : très grands, serrés, pleins */
+h1{font-weight:800;font-stretch:72%;font-size:clamp(64px,14vw,184px);line-height:.86;letter-spacing:-.02em;margin:0 0 var(--s4);text-transform:uppercase}
+h1.page{font-size:clamp(48px,9vw,112px)}
+h2{font-weight:700;font-stretch:80%;font-size:clamp(28px,4vw,44px);line-height:1;letter-spacing:-.01em;text-transform:uppercase;margin:var(--s8) 0 var(--s3)}
+h2.haut{margin-top:0}
+.chapeau{font-size:clamp(20px,2.2vw,26px);line-height:1.4;color:var(--ink);max-width:34ch;margin:0}
+
+/* L'horizon : un trait de lumière au ras de la page */
+.horizon{height:2px;background:var(--aurore);margin:var(--s8) 0 0;box-shadow:0 0 24px 2px rgba(124,240,181,.35)}
+
+/* Blocs : séparés par des traits, pas des cartes */
+.card,.bloc{border-top:1px solid var(--trait);padding:var(--s4) 0;margin:0}
+.grille{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:var(--s3) var(--s6);border-top:1px solid var(--trait);padding:var(--s6) 0}
+.grille>h2{margin:0}
+.qr{margin:0 0 var(--s3)}
+.qr dt{color:var(--ink);font-weight:600;font-size:20px;margin:0 0 var(--s1)}
+.qr dd{margin:0 0 var(--s4);color:var(--muted);max-width:62ch}.qr dd:last-child{margin-bottom:0}
+.chapeau+.card{margin-top:var(--s6)}
+
+/* Lien principal : une ligne entière qui s'allume */
+.direct{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s3);border-top:1px solid var(--trait);border-bottom:1px solid var(--trait);padding:var(--s4) 0;text-decoration:none;color:var(--ink)}
+.direct span{font-weight:700;font-stretch:80%;font-size:clamp(24px,3.4vw,40px);text-transform:uppercase;line-height:1}
+.direct em{font-style:normal;color:var(--aurore);font-size:clamp(24px,3.4vw,40px);line-height:1;transition:transform .2s}
+.direct:hover,.direct:focus-visible{color:var(--aurore)}
+.direct:hover em,.direct:focus-visible em{transform:translateX(8px)}
+
+footer{margin-top:var(--s8);padding-top:var(--s3);border-top:1px solid var(--trait);font-size:15px;color:var(--muted);display:flex;flex-wrap:wrap;gap:var(--s1) var(--s3)}
+.note{font-size:15px}
+
+/* Page « ce soir » : les chiffres en très grand */
+.chiffres{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3)}.chiffres p{margin:0;font-size:15px}
+.chiffres strong{display:block;font-weight:800;font-stretch:72%;font-size:clamp(72px,12vw,144px);line-height:.9;color:var(--ink);font-variant-numeric:tabular-nums}
+.constat{border-left:2px solid var(--trait);padding:var(--s1) var(--s2);color:var(--ink);margin:var(--s3) 0}.constat.ok{border-color:var(--aurore)}
+.barres{display:flex;gap:4px;height:120px;align-items:stretch;margin:var(--s3) 0 var(--s1)}
 .barre{flex:1;display:flex;flex-direction:column;justify-content:flex-end;min-width:0}
-.barre span{display:block;background:rgba(124,240,181,.45);border-radius:4px 4px 0 0}.barre.orage span{background:var(--accent)}
-.barre small{font-size:10px;color:var(--muted);text-align:center;margin-top:3px}
-.villes{width:100%;border-collapse:collapse;font-size:15px}.villes th{text-align:left;font-size:12px;color:var(--muted);font-weight:600;padding:6px 0}
-.villes td{padding:8px 0;border-top:1px solid rgba(255,255,255,.08);color:var(--ink)}.villes td:last-child{text-align:right}
-.ce-soir{color:var(--muted)}.ce-soir.oui{color:var(--accent);font-weight:600}
-.cta{background:var(--accent);border-radius:20px;padding:20px 22px;margin:28px 0}.cta p,.cta strong{color:#0B0B0D}
+.barre span{display:block;background:#3A5C4C}.barre.orage span{background:var(--aurore)}
+.barre small{font-size:11px;color:var(--muted);text-align:center;margin-top:4px}
+.villes{width:100%;border-collapse:collapse;font-size:17px}.villes th{text-align:left;font-size:13px;color:var(--muted);font-weight:600;padding:var(--s1) 0;text-transform:uppercase;letter-spacing:.06em}
+.villes td{padding:12px 0;border-top:1px solid var(--trait);color:var(--ink)}.villes td:last-child{text-align:right}
+.ce-soir{color:var(--muted)}.ce-soir.oui{color:var(--aurore);font-weight:600}
+.cta{border:1px solid var(--aurore);padding:var(--s4);margin:var(--s6) 0}.cta p{color:var(--ink);margin:0}
+
+@media (max-width:720px){
+  main{padding:var(--s4) var(--s2) var(--s6)}
+  .marque{margin-bottom:var(--s8)}
+  .grille{grid-template-columns:1fr;padding:var(--s4) 0}
+  .chiffres{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
